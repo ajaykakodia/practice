@@ -31,19 +31,42 @@ func (cs customSort) Less(i, j int) bool {
 }
 
 func main() {
-	students := []student{
-		student{"Ajay1", 2, "B", 3},
-		student{"Ajay2", 2, "B", 1},
-		student{"Ajay3", 2, "A", 2},
-		student{"Ajay4", 2, "A", 1},
-		student{"Ajay5", 1, "B", 2},
-		student{"Ajay6", 1, "B", 1},
-		student{"Ajay7", 1, "A", 2},
-		student{"Ajay8", 1, "C", 1},
+	stds := []student{
+		{"Ajay1", 2, "B", 3},
+		{"Ajay2", 2, "B", 1},
+		{"Ajay3", 2, "A", 2},
+		{"Ajay4", 2, "A", 1},
+		{"Ajay5", 1, "B", 2},
+		{"Ajay6", 1, "B", 1},
+		{"Ajay7", 1, "A", 2},
+		{"Ajay8", 1, "C", 1},
 	}
-	fmt.Println(students)
+	fmt.Println(stds)
 
-	sort.Sort(customSort(students))
+	sort.Sort(customSort(stds))
+
+	fmt.Println(stds)
+
+	students := []student{
+		{"Ajay1", 2, "B", 3},
+		{"Ajay2", 2, "B", 1},
+		{"Ajay3", 2, "A", 2},
+		{"Ajay4", 2, "A", 1},
+		{"Ajay5", 1, "B", 2},
+		{"Ajay6", 1, "B", 1},
+		{"Ajay7", 1, "A", 2},
+		{"Ajay8", 1, "C", 1},
+	}
+
+	sort.Slice(students, func(i, j int) bool {
+		if students[i].class == students[j].class {
+			if students[i].section == students[j].section {
+				return students[i].rollNumber < students[j].rollNumber
+			}
+			return students[i].section < students[j].section
+		}
+		return students[i].class < students[j].class
+	})
 
 	fmt.Println(students)
 }
